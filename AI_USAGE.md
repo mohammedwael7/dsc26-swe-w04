@@ -10,8 +10,8 @@ The first inbox-ordering test created the urgent transfer before the normal tran
 
 **Pick one mutant your first draft of tests did not kill. Why not, and what did you add?**
 
-My first inbox-priority test would have missed M10. I created the urgent transfer first and the normal transfer second, so even a broken inbox that kept request order would put the urgent card first and pass. I changed the test to request the normal transfer first, then the urgent one, and assert that the urgent card still appears first. That makes request order disagree with priority, so the test can catch the mutant.
+My first inbox test could miss M10 because I requested the urgent transfer first. A FIFO inbox would still show it first and pass. I reversed the request order and checked that the urgent transfer still appears first.
 
 **Why is a test that only asserts `status_code == 409` weaker than one that asserts the problem `type`?**
 
-A 409 only tells me that the server reported some conflict. Both `below-reserve` and `not-pending` are supposed to return 409, but they mean different things and require different client behavior. I also assert the problem `type` so the test fails if the API returns the right status for the wrong reason or maps the error to the wrong documented case.
+A 409 only says that some conflict happened. Checking `type` tells me whether it was `below-reserve` or `not-pending`, so the test catches the wrong error even when the status code is right.
