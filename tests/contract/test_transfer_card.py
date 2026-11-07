@@ -31,11 +31,13 @@ def test_inbox_transfer_card_matches_contract_schema(client):
 
     requested = client.post("/v1/transfers", json=transfer_payload())
     assert requested.status_code in (200, 201)
+    transfer_id = requested.json()["id"]
 
     inbox = client.get("/v1/branches/branch-b/transfers")
     assert inbox.status_code == 200
     cards = inbox.json()
     if isinstance(cards, dict):
         cards = cards.get("transfers", cards.get("items"))
-    assert cards
-    validate(instance=cards[0], schema=schema)
+    assert isinstance(cards, list)
+    card = next(card for card in cards if card["id"] == transfer_id)
+    validate(instance=card, schema=schema)

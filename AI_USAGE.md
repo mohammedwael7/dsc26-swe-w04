@@ -8,8 +8,6 @@ The first inbox-ordering test created the urgent transfer before the normal tran
 
 ## In my own words
 
-*Draft answers based on this work. Review and confirm or rewrite them in your own words before submission.*
-
 **Pick one mutant your first draft of tests did not kill. Why not, and what did you add?**
 
 In my view, the inbox-priority mutant could survive my first draft because I requested the urgent transfer first, so sorting by request order gave the same result. I changed the test to request the normal transfer first and the urgent one second, then check that the urgent card is still listed first. That makes the test show the priority rule more clearly.
