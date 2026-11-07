@@ -6,7 +6,7 @@ from jsonschema import validate
 from tests.helpers import transfer_payload
 
 
-def test_transfer_card_matches_schema_and_uses_utc_timestamp(client):
+def test_contract_transfer_card_matches_json_schema_and_uses_utc_timestamp(client):
     schema_path = (
         Path(__file__).resolve().parents[2]
         / "contracts"

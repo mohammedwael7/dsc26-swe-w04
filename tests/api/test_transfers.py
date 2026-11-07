@@ -8,7 +8,7 @@ def test_same_branch_request_is_rejected_as_unprocessable(client):
     assert response.status_code == 422
 
 
-def test_below_reserve_error_uses_problem_media_type(client):
+def test_below_reserve_error_uses_problem_media_type_and_type(client):
     response = client.post(
         "/v1/transfers", json=transfer_payload(quantity=26)
     )
@@ -23,6 +23,13 @@ def test_request_for_unknown_item_is_not_found(client):
     )
     assert response.status_code == 404
     assert response.headers["content-type"].startswith("application/problem+json")
+
+
+def test_transfer_response_requested_at_is_utc_with_z_suffix(client):
+    response = client.post("/v1/transfers", json=transfer_payload())
+    assert response.status_code in (200, 201)
+    requested_at = response.json()["requestedAt"]
+    assert requested_at.endswith("Z")
 
 
 def test_approval_moves_stock_once_and_second_approval_is_rejected(client):
