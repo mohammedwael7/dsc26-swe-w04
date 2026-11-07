@@ -2,7 +2,7 @@
 
 Project used: `dsc26-swe-w04`, the available W4 repository, because no separate squad repository link was available. The task used for the experiment came from the recent review feedback about validating destination-inbox transfer cards; no formal squad backlog was available.
 
-PR: https://github.com/mohammedwael7/dsc26-swe-w04/pull/1
+PR: https://github.com/mohammedwael7/dsc26-swe-w04/pull/2
 
 ```markdown
 # dsc26-swe-w04 test suite
